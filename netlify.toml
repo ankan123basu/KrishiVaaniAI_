@@ -1,0 +1,13 @@
+# Netlify configuration for KrishiVaani AI static frontend
+
+[build]
+  # No build step – plain HTML/JS
+  publish = "."
+
+# Proxy all API calls to your hosted Flask backend.
+# Replace the domain below once your backend is deployed (e.g. Render/Railway URL)
+[[redirects]]
+  from = "/api/*"
+  to = "https://YOUR-BACKEND-DOMAIN/api/:splat"
+  status = 200
+  force = true

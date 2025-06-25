@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KrishiVaani AI</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Pixel Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="images/Screenshot%202025-06-25%20121137.png">
+  <style>
+    body {
+      font-family: 'Press Start 2P', monospace;
+      background: url('images/pixel-art-retro-videogame-landscape-background-combine-harvester-wheat-field-300530648.webp') center center/cover no-repeat fixed;
+      /* Replace bg1.png with the actual image you want as background */
+      min-height: 100vh;
+      color: #fff;
+      text-shadow: 2px 2px 0 #222;
+    }
+    .retro-border {
+      border: 4px solid #00ff99;
+      box-shadow: 0 0 0 4px #222, 0 0 16px 0 #00ff9988;
+      border-radius: 12px;
+    }
+    .pixel-btn {
+      background: #222;
+      color: #00ff99;
+      border: 2px solid #00ff99;
+      font-family: 'Press Start 2P', monospace;
+      padding: 0.5rem 1.5rem;
+      margin: 0.5rem;
+      border-radius: 8px;
+      transition: background 0.2s, color 0.2s;
+    }
+    .pixel-btn:hover {
+      background: #00ff99;
+      color: #222;
+    }
+  </style>
+</head>
+<body class="flex flex-col items-center justify-center min-h-screen">
+  <div class="absolute top-4 right-8">
+    <select id="langSelect" class="p-1 rounded text-black">
+      <option value="en">English</option>
+      <option value="hi">हिन्दी</option>
+      <option value="bn">বাংলা</option>
+      <option value="ta">தமிழ்</option>
+      <option value="te">తెలుగు</option>
+      <option value="mr">मराठी</option>
+      <option value="gu">ગુજરાતી</option>
+      <option value="kn">ಕನ್ನಡ</option>
+      <option value="ml">മലയാളം</option>
+      <option value="pa">ਪੰਜਾਬੀ</option>
+      <option value="ur">اردو</option>
+      <option value="or">ଓଡ଼ିଆ</option>
+      <option value="as">অসমীয়া</option>
+    </select>
+  </div>
+  <header class="mt-8 mb-6">
+    <h1 class="text-3xl md:text-5xl retro-border py-4 bg-black bg-opacity-60 text-center w-full">
+        KrishiVaani AI
+      </h1>
+          <p class="mt-4 text-lg md:text-xl text-center bg-black bg-opacity-50 px-4 py-2 rounded retro-border">Smart Farming Insights for Every Indian Farmer</p>
+  </header>
+  <main class="w-full max-w-2xl p-8 bg-black bg-opacity-70 retro-border">
+    <section class="mb-6">
+      <h2 class="text-xl mb-2" data-i18n="uploadLabel">Upload Crop Leaf Photo</h2>
+      <input type="file" id="imageInput" accept="image/*" class="block w-full mb-4" />
+      <button class="pixel-btn" id="analyzeBtn" data-i18n="analyzeBtn">Analyze</button>
+    </section>
+    <section class="mb-6">
+      <h2 class="text-xl mb-2" data-i18n="askSpeak">Ask or Speak Your Query</h2>
+      <div class="flex gap-2">
+        <input type="text" id="textQuery" placeholder="Type your question..." data-i18n-placeholder="queryPlaceholder" class="block w-full mb-2 p-2 rounded text-black" />
+        <button class="pixel-btn" id="sendBtn" aria-label="Send Query" data-i18n="sendBtn">Send</button>
+        <button class="pixel-btn" id="voiceBtn" aria-label="Speak Query" data-i18n="speakBtn">🎤 Speak</button>
+        <button class="pixel-btn" id="stopBtn" aria-label="Stop Voice / Speech" data-i18n="stopBtn">⏹ Stop</button>
+      </div>
+    </section>
+    <section class="mb-8">
+      <h2 class="text-2xl mb-4 font-bold">Results & Advice</h2>
+      <div class="flex items-center mb-2">
+        <img src="images/Screenshot 2025-06-24 004009.png" alt="KrishiVaani AI Avatar" class="w-10 h-10 rounded-full mr-3 border-2 border-green-400 bg-black bg-opacity-40" />
+        <span class="font-mono text-green-300 text-xs">KrishiVaani AI</span>
+      </div>
+      <div id="results" class="p-4 bg-gray-900 bg-opacity-80 rounded retro-border min-h-[80px]">Awaiting input...</div>
+      <button class="pixel-btn mt-4" id="speakAdviceBtn" data-i18n="listenBtn">🔊 Listen</button>
+    </section>
+    <section class="mt-8">
+      <div class="mb-6">
+        <h3 class="text-lg mb-2" data-i18n="weatherHeading">Weather</h3>
+        <button class="pixel-btn mb-2" id="fetchWeatherBtn" data-i18n="useLocationBtn">📍 Use My Location</button>
+        <div id="weather" class="p-2 bg-gray-800 rounded retro-border min-h-[40px]">Loading...</div>
+      </div>
+      <div>
+        <h3 class="text-lg mb-2" data-i18n="mandiHeading">Mandi Prices</h3>
+        <div class="flex flex-wrap gap-2 mb-2">
+          <select id="marketSelect" class="p-1 rounded text-black" title="Select Market (City)" aria-label="Select Market">
+            <optgroup label="North India">
+              <option value="DELHI">Delhi</option>
+              <option value="LUDHIANA">Ludhiana</option>
+              <option value="AMRITSAR">Amritsar</option>
+              <option value="CHANDIGARH">Chandigarh</option>
+              <option value="KANPUR">Kanpur</option>
+              <option value="LUCKNOW">Lucknow</option>
+              <option value="AGRA">Agra</option>
+              <option value="JAIPUR">Jaipur</option>
+              <option value="VARANASI">Varanasi</option>
+              <option value="ALLAHABAD">Allahabad</option>
+            </optgroup>
+            <optgroup label="West India">
+              <option value="MUMBAI">Mumbai</option>
+              <option value="NAGPUR">Nagpur</option>
+              <option value="PUNE">Pune</option>
+              <option value="AHMEDABAD">Ahmedabad</option>
+              <option value="SURAT">Surat</option>
+              <option value="VADODARA">Vadodara</option>
+              <option value="RAJKOT">Rajkot</option>
+              <option value="NASHIK">Nashik</option>
+              <option value="AURANGABAD">Aurangabad</option>
+            </optgroup>
+            <optgroup label="South India">
+              <option value="BENGALURU">Bengaluru</option>
+              <option value="CHENNAI">Chennai</option>
+              <option value="HYDERABAD">Hyderabad</option>
+              <option value="COIMBATORE">Coimbatore</option>
+              <option value="MADURAI">Madurai</option>
+              <option value="VIJAYAWADA">Vijayawada</option>
+              <option value="VISAKHAPATNAM">Visakhapatnam</option>
+              <option value="THIRUVANANTHAPURAM">Thiruvananthapuram</option>
+              <option value="MYSURU">Mysuru</option>
+              <option value="HUBBALLI">Hubballi</option>
+            </optgroup>
+            <optgroup label="East & North-East India">
+              <option value="KOLKATA">Kolkata</option>
+              <option value="PATNA">Patna</option>
+              <option value="GUWAHATI">Guwahati</option>
+              <option value="RANCHI">Ranchi</option>
+              <option value="BHUBANESWAR">Bhubaneswar</option>
+              <option value="SILIGURI">Siliguri</option>
+              <option value="DURGAPUR">Durgapur</option>
+              <option value="AGARTALA">Agartala</option>
+              <option value="SHILLONG">Shillong</option>
+              <option value="AIZAWL">Aizawl</option>
+            </optgroup>
+            <optgroup label="Central India">
+              <option value="BHOPAL">Bhopal</option>
+              <option value="INDORE">Indore</option>
+              <option value="JABALPUR">Jabalpur</option>
+              <option value="RAIPUR">Raipur</option>
+              <option value="BILASPUR">Bilaspur</option>
+              <option value="GWALIOR">Gwalior</option>
+              <option value="SATNA">Satna</option>
+              <option value="REWA">Rewa</option>
+              <option value="SAGAR">Sagar</option>
+              <option value="UJJAIN">Ujjain</option>
+            </optgroup>
+          </select>
+          <select id="commoditySelect" class="p-1 rounded text-black" title="Select Crop/Commodity" aria-label="Select Commodity">
+            <option value="Wheat">Wheat</option>
+            <option value="Rice">Rice</option>
+            <option value="Maize">Maize</option>
+            <option value="Cotton">Cotton</option>
+            <option value="Soyabean">Soyabean</option>
+            <option value="Potato">Potato</option>
+            <option value="Onion">Onion</option>
+            <option value="Tomato">Tomato</option>
+            <option value="Sugarcane">Sugarcane</option>
+            <option value="Groundnut">Groundnut</option>
+            <option value="Mustard">Mustard</option>
+            <option value="Paddy">Paddy</option>
+            <option value="Barley">Barley</option>
+            <option value="Bajra">Bajra</option>
+            <option value="Jowar">Jowar</option>
+            <option value="Chana">Chana</option>
+            <option value="Masur">Masur</option>
+            <option value="Moong">Moong</option>
+            <option value="Urad">Urad</option>
+            <option value="Peas">Peas</option>
+            <option value="Arhar">Arhar</option>
+            <option value="Green Gram">Green Gram</option>
+            <option value="Black Gram">Black Gram</option>
+            <option value="Red Gram">Red Gram</option>
+            <option value="Lentil">Lentil</option>
+            <option value="Gram">Gram</option>
+            <option value="Sesame">Sesame</option>
+            <option value="Sunflower">Sunflower</option>
+            <option value="Linseed">Linseed</option>
+            <option value="Castor">Castor</option>
+            <option value="Rapeseed">Rapeseed</option>
+            <option value="Safflower">Safflower</option>
+            <option value="Sorghum">Sorghum</option>
+            <option value="Millet">Millet</option>
+            <option value="Pearl Millet">Pearl Millet</option>
+            <option value="Finger Millet">Finger Millet</option>
+            <option value="Little Millet">Little Millet</option>
+            <option value="Foxtail Millet">Foxtail Millet</option>
+            <option value="Proso Millet">Proso Millet</option>
+            <option value="Kodo Millet">Kodo Millet</option>
+            <option value="Barnyard Millet">Barnyard Millet</option>
+            <option value="Horse Gram">Horse Gram</option>
+            <option value="Bengal Gram">Bengal Gram</option>
+            <option value="Kidney Beans">Kidney Beans</option>
+            <option value="French Beans">French Beans</option>
+            <option value="Cluster Beans">Cluster Beans</option>
+            <option value="Cowpea">Cowpea</option>
+            <option value="Pigeon Pea">Pigeon Pea</option>
+            <option value="Red Kidney Beans">Red Kidney Beans</option>
+            <option value="Green Peas">Green Peas</option>
+            <option value="Carrot">Carrot</option>
+            <option value="Cabbage">Cabbage</option>
+            <option value="Cauliflower">Cauliflower</option>
+            <option value="Spinach">Spinach</option>
+            <option value="Radish">Radish</option>
+            <option value="Brinjal">Brinjal</option>
+            <option value="Pumpkin">Pumpkin</option>
+            <option value="Bottle Gourd">Bottle Gourd</option>
+            <option value="Bitter Gourd">Bitter Gourd</option>
+            <option value="Cucumber">Cucumber</option>
+            <option value="Okra">Okra</option>
+            <option value="Apple">Apple</option>
+            <option value="Banana">Banana</option>
+            <option value="Mango">Mango</option>
+            <option value="Orange">Orange</option>
+            <option value="Grapes">Grapes</option>
+            <option value="Pomegranate">Pomegranate</option>
+            <option value="Guava">Guava</option>
+            <option value="Papaya">Papaya</option>
+            <option value="Lemon">Lemon</option>
+            <option value="Watermelon">Watermelon</option>
+            <option value="Muskmelon">Muskmelon</option>
+          </select>
+          <button class="pixel-btn" id="fetchMandiBtn">Fetch Prices</button>
+        </div>
+        <div id="mandi" class="p-2 bg-gray-800 rounded retro-border min-h-[40px]">Loading...</div>
+      </div>
+    </section>
+  </main>
+  <footer class="mt-8 mb-4 text-center text-xs bg-black bg-opacity-40 px-4 py-2 rounded retro-border">
+    &copy; 2025 KrishiVaani AI &mdash; Empowering Farmers in Every Language
+  </footer>
+  <script src="main.js"></script>
+</body>
+</html>

@@ -1,0 +1,10 @@
+flask
+flask-cors
+torch
+torchvision
+pillow
+python-dotenv
+requests
+gTTS==2.4.0
+google-generativeai  # Gemini SDK
+# Add other dependencies as needed for Whisper or additional features
