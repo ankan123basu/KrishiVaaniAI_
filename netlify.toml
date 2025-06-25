@@ -8,6 +8,6 @@
 # Replace the domain below once your backend is deployed (e.g. Render/Railway URL)
 [[redirects]]
   from = "/api/*"
-  to = "https://YOUR-BACKEND-DOMAIN/api/:splat"
+  to   = "https://krishivaani-backend.onrender.com/api/:splat"
   status = 200
   force = true
