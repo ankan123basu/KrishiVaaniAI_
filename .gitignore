@@ -7,3 +7,15 @@ __pycache__/
 .env
 .DS_Store
 node_modules/
+
+# Notebooks
+.ipynb_checkpoints/
+
+# TorchServe and large model artifacts
+model_store/
+logs/
+*.pth
+
+# Datasets and sample images
+data/
+images/
