@@ -2,13 +2,21 @@
 
 Smart Farming Insights for Indian Farmers
 > KrishiVaani AI is an open-source, bilingual-first platform that turns any low-end phone into a pocket agronomist. Snap a leaf photo, ask questions in your mother-tongue, and get actionable, hyper-local advice spoken back to you – even offline.
+
 ![image](https://github.com/user-attachments/assets/c75bd89c-a1c2-4798-bb75-7c028c62cad2)
+
+![Screenshot 2025-06-25 200033](https://github.com/user-attachments/assets/f9fb467b-0d06-4316-b95b-c3a94741420c)
+
+![image](https://github.com/user-attachments/assets/dd4c6329-7f0a-49c2-bb4a-7fe626597897)
 
 ![image](https://github.com/user-attachments/assets/6453da56-5dfa-412b-8116-23c92acbf54a)
 
 ![image](https://github.com/user-attachments/assets/b73a9d0f-c99b-4ac6-96a1-eeba7286d7aa)
 
 ![image](https://github.com/user-attachments/assets/05397c18-483b-4ebe-8a4f-c284a3904e5f)
+
+![Screenshot 2025-06-27 203627](https://github.com/user-attachments/assets/e19994b2-f512-4519-bf0d-f2dbbfe40ded)
+
 
 
 ## Features
