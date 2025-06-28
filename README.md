@@ -90,7 +90,7 @@ An end-to-end web platform that delivers disease diagnosis, personalised remedie
 | Frontend | HTML5, Tailwind CSS (CDN), Vanilla JS, Web Speech API, gTTS audio fallback |
 | Backend | Python 3.11, Flask 3, Torch 2 / torchvision (MobileNetV2), google-generativeai (Gemini), requests, python-dotenv |
 | Data | PlantVillage leaf-disease dataset, OpenWeatherMap, data.gov.in AGMARKNET |
-|  Netlify (static), Git + GitHub, Windows 10 dev box |
+| Deployment | Netlify (static), Git + GitHub, Windows 10 dev box |
 
 ## 📂 Directory Structure
 ```
