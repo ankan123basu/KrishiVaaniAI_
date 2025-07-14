@@ -5,13 +5,15 @@ Smart Farming Insights for Indian Farmers
 ## 🎥 Demo YouTube Video of my Project
 
 <p align="center">
-  > Click the image below to watch the full demo of **KrishiVaani**
+  > Click this image below to watch the full demo of **KrishiVaani**
   <a href="https://www.youtube.com/watch?v=Utio0C98-ZE" target="_blank">
     <img src="https://img.youtube.com/vi/Utio0C98-ZE/maxresdefault.jpg" 
          alt="KrishiVaani Demo Video" 
          style="width:100%; height:auto; border-radius:12px;" />
   </a>
 </p>
+
+Other SCREENSHOTS of my Project
 
 ![Screenshot 2025-06-25 200033](https://github.com/user-attachments/assets/f9fb467b-0d06-4316-b95b-c3a94741420c)
 
@@ -28,6 +30,10 @@ Smart Farming Insights for Indian Farmers
 ![image](https://github.com/user-attachments/assets/b73a9d0f-c99b-4ac6-96a1-eeba7286d7aa)
 
 ![image](https://github.com/user-attachments/assets/05397c18-483b-4ebe-8a4f-c284a3904e5f)
+
+<img width="1910" height="852" alt="Screenshot 2025-06-25 195112" src="https://github.com/user-attachments/assets/fe363168-d15c-4abd-ad77-47f80ed1c2e3" />
+
+<img width="1911" height="904" alt="Screenshot 2025-06-25 195001" src="https://github.com/user-attachments/assets/db24e46e-b09b-4f39-b13e-cdca81db41e6" />
 
 
 ## Features
