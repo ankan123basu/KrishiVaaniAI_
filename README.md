@@ -7,6 +7,12 @@ Smart Farming Insights for Indian Farmers
 
 ![Screenshot 2025-06-25 200033](https://github.com/user-attachments/assets/f9fb467b-0d06-4316-b95b-c3a94741420c)
 
+![Screenshot 2025-06-27 203627](https://github.com/user-attachments/assets/e19994b2-f512-4519-bf0d-f2dbbfe40ded)
+
+<img width="999" height="555" alt="image" src="https://github.com/user-attachments/assets/fcc7b117-5348-43db-ad3c-7687f5d86e11" />
+
+<img width="979" height="496" alt="image" src="https://github.com/user-attachments/assets/1b16bbd9-f1b7-4ebc-8d6e-d100c13128b4" />
+
 ![image](https://github.com/user-attachments/assets/dd4c6329-7f0a-49c2-bb4a-7fe626597897)
 
 ![image](https://github.com/user-attachments/assets/6453da56-5dfa-412b-8116-23c92acbf54a)
@@ -14,9 +20,6 @@ Smart Farming Insights for Indian Farmers
 ![image](https://github.com/user-attachments/assets/b73a9d0f-c99b-4ac6-96a1-eeba7286d7aa)
 
 ![image](https://github.com/user-attachments/assets/05397c18-483b-4ebe-8a4f-c284a3904e5f)
-
-![Screenshot 2025-06-27 203627](https://github.com/user-attachments/assets/e19994b2-f512-4519-bf0d-f2dbbfe40ded)
-
 
 
 ## Features
