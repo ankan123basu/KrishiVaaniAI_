@@ -1,5 +1,7 @@
 # KrishiVaani 
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 Smart Farming Insights for Indian Farmers
 > KrishiVaani AI is an open-source, bilingual-first platform that turns any low-end phone into a pocket agronomist. Snap a leaf photo, ask questions in your mother-tongue, and get actionable, hyper-local advice spoken back to you – even offline.
 ## 🎥 Demo YouTube Video of my Project
@@ -136,19 +138,18 @@ For dataset/model or API setup help, contact the maintainer.
 - **Class Distribution**: Balanced with 2,500-3,000 images per class
 
 ### Model Training
-- **Framework**: PyTorch 2.0
-- **Optimizer**: Adam (lr=0.001)
+- **Framework**: PyTorch 1.13.1
+- **Optimizer**: Adam (learning rate: 0.0001)
 - **Batch Size**: 32
 - **Epochs**: 5
-- **Training Time**: ~2 hours on NVIDIA T4 GPU
+- **Training Time**: ~5-6 hours on NVIDIA T4 GPU
 - **Final Validation Metrics**:
-  - Precision: 99.3%
-  - Recall: 99.2%
-  - F1-Score: 99.2%
+  - Accuracy: 99.48%
+  - Loss: 0.0179
 
 ## 📜 Problem Statement
 
-Smallholder Indian farmers often struggle with crop diseases, weather unpredictability and market-price opacity. Existing advisory apps are usually English-centric, need high bandwidth, or miss local context, leaving millions without timely, actionable guidance.
+Indian farmers often struggle with crop diseases, weather unpredictability and market-price opacity. Existing advisory apps are usually English-centric, need high bandwidth, or miss local context, leaving millions without timely, actionable guidance.
 
 ## 💡 Solution – KrishiVaani AI
 
@@ -205,13 +206,26 @@ An end-to-end web platform that delivers disease diagnosis, personalised remedie
   - Server-side TTS fallback
 
 #### Disease Coverage
-- **Total Diseases**: 15 classes
-- **Crops Covered**:
-  - Apple (4 diseases + healthy)
-  - Cherry (1 disease + healthy)
-  - Corn (3 diseases + healthy)
-  - Grape (3 diseases + healthy)
-  - Potato (2 diseases + healthy)
+- **Total Classes**: 15 (13 diseases + 2 healthy states)
+- **Crops & Diseases**:
+  - **Pepper Bell** (2 classes)
+    - Bacterial spot
+    - Healthy
+  - **Potato** (3 classes)
+    - Early blight
+    - Late blight
+    - Healthy
+  - **Tomato** (10 classes)
+    - Bacterial spot
+    - Early blight
+    - Late blight
+    - Leaf Mold
+    - Septoria leaf spot
+    - Spider mites (Two-spotted)
+    - Target Spot
+    - Yellow Leaf Curl Virus
+    - Mosaic virus
+    - Healthy
 
 ### Potential Impact
 
@@ -250,10 +264,12 @@ An end-to-end web platform that delivers disease diagnosis, personalised remedie
 ## 🛠️ Tech Stack
 | Layer | Technology |
 |-------|------------|
-| Frontend | HTML5, Tailwind CSS (CDN), Vanilla JS, Web Speech API, gTTS audio fallback |
-| Backend | Python 3.11, Flask 3, Torch 2 / torchvision (MobileNetV2), google-generativeai (Gemini), requests, python-dotenv |
-| Data | PlantVillage leaf-disease dataset, OpenWeatherMap, data.gov.in AGMARKNET |
-| Deployment | Netlify (static), Git + GitHub, Windows 10 dev box |
+| Frontend | HTML5, Tailwind CSS (CDN), Vanilla JavaScript, Web Speech API, gTTS fallback |
+| Backend | Python 3.11, Flask 3.0.0, PyTorch 1.13.1, torchvision 0.14.1 |
+| AI/ML | MobileNetV2 (fine-tuned), Google Gemini API |
+| APIs | OpenWeatherMap, AGMARKNET, Google TTS |
+| Data | PlantVillage leaf-disease dataset (15 classes) |
+| Deployment | Gunicorn, Render/Netlify |
 
 ## 📂 Directory Structure
 ```
@@ -298,5 +314,5 @@ python app.py
 Pull requests welcome! Please lint with `ruff` + `prettier`, and ensure new features have corresponding unit tests.
 
 ## 📄 License
-MIT © 2025 KrishiVaani AI Team
+MIT © 2025 AnkanBasu , LOVELY PROFESSIONAL UNIVERSITY
 
