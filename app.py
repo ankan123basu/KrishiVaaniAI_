@@ -6,7 +6,7 @@ from torchvision import models
 from PIL import Image
 import io
 import json
-from flask import Flask, request, jsonify, send_from_directory, render_template_string
+from flask import Flask, request, jsonify, send_from_directory, render_template_string, send_file
 from flask_cors import CORS
 import requests
 from gtts import gTTS
@@ -125,7 +125,7 @@ def generate_remedy_gemini(disease_name, lang='en'):
     except Exception:
         return "Consult a local agricultural expert for specific treatment options."
 
-app = Flask(__name__, static_folder='.', static_url_path='')
+app = Flask(__name__, static_folder='static', static_url_path='/static')
 CORS(app)
 
 GEMINI_API_KEY = os.getenv('GEMINI_API_KEY')
@@ -134,11 +134,13 @@ MANDI_API_KEY = os.getenv('MANDI_API_KEY')
 
 # Serve index.html for root and /index.html
 @app.route('/')
-@app.route('/index.html')
-def serve_index():
-    return send_from_directory('.', 'index.html')
+def index():
+    return app.send_static_file('index.html')
 
-# Serve static files (JS, images, etc.)
+@app.route('/images/<path:filename>')
+def serve_image(filename):
+    return send_from_directory('images', filename)
+
 @app.route('/<path:filename>')
 def serve_static(filename):
     if os.path.exists(filename):
