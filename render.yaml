@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: krishivaani
+    env: python
+    region: ap-south-1
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app
+    envVars:
+      - key: GEMINI_API_KEY
+        from: secrets
+      - key: OPENWEATHERMAP_API_KEY
+        from: secrets
+      - key: AGMARKNET_API_KEY
+        from: secrets
