@@ -148,22 +148,45 @@ def serve_index():
 # Serve static files (JS, images, etc.)
 @app.route('/static/<path:filename>')
 def serve_static(filename):
-    # Handle URL-encoded filenames
-    import urllib.parse
     try:
-        # Try to decode the filename if it's URL-encoded
+        # Handle URL-encoded filenames
+        import urllib.parse
+        import os
+        
+        # Decode the filename if it's URL-encoded
         decoded_filename = urllib.parse.unquote(filename)
-        if decoded_filename != filename:
-            return send_from_directory('static', decoded_filename)
-        return send_from_directory('static', filename)
+        
+        # Log the request for debugging
+        print(f"Serving static file: {decoded_filename}")
+        
+        # Check if file exists before sending
+        static_dir = os.path.join(app.root_path, 'static')
+        file_path = os.path.join(static_dir, *decoded_filename.split('/'))
+        
+        if not os.path.isfile(file_path):
+            print(f"File not found: {file_path}")
+            return f"File not found: {decoded_filename}", 404
+            
+        # Set cache control headers
+        response = send_from_directory('static', decoded_filename)
+        response.headers['Cache-Control'] = 'public, max-age=31536000'  # 1 year cache
+        return response
+        
     except Exception as e:
-        return str(e), 404
+        print(f"Error serving static file {filename}: {str(e)}")
+        return str(e), 500
 
 # Handle /images/ path for backward compatibility
 @app.route('/images/<path:filename>')
 def serve_legacy_images(filename):
-    # Redirect to the new static path
-    return redirect(f'/static/images/{filename}')
+    try:
+        # Log the legacy image request
+        print(f"Legacy image request: {filename}")
+        # Redirect to the new static path with proper URL encoding
+        return redirect(f'/static/images/{filename}')
+    except Exception as e:
+        print(f"Error in legacy image handler: {str(e)}")
+        return str(e), 500
 
 # Serve main.js from root
 @app.route('/main.js')
