@@ -6,7 +6,7 @@ services:
     startCommand: "gunicorn app:app --bind 0.0.0.0:$PORT --workers 1"
     envVars:
       - key: PYTHON_VERSION
-        value: 3.9.16
+        value: 3.10.13  # More stable with PyTorch
       - key: PORT
         value: 10000  # This will be automatically used by your Flask app
       - key: GEMINI_API_KEY
