@@ -6,7 +6,7 @@ from torchvision import models
 from PIL import Image
 import io
 import json
-from flask import Flask, request, jsonify, send_file, send_from_directory, url_for
+from flask import Flask, request, jsonify, send_file, send_from_directory, url_for, redirect
 import os
 from werkzeug.utils import secure_filename
 from flask_cors import CORS
@@ -148,7 +148,22 @@ def serve_index():
 # Serve static files (JS, images, etc.)
 @app.route('/static/<path:filename>')
 def serve_static(filename):
-    return send_from_directory('static', filename)
+    # Handle URL-encoded filenames
+    import urllib.parse
+    try:
+        # Try to decode the filename if it's URL-encoded
+        decoded_filename = urllib.parse.unquote(filename)
+        if decoded_filename != filename:
+            return send_from_directory('static', decoded_filename)
+        return send_from_directory('static', filename)
+    except Exception as e:
+        return str(e), 404
+
+# Handle /images/ path for backward compatibility
+@app.route('/images/<path:filename>')
+def serve_legacy_images(filename):
+    # Redirect to the new static path
+    return redirect(f'/static/images/{filename}')
 
 # Serve main.js from root
 @app.route('/main.js')
