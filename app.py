@@ -132,6 +132,9 @@ CORS(app)
 app.config['UPLOAD_FOLDER'] = 'uploads'
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16MB max file size
 
+# Ensure static directory exists
+os.makedirs('static/images', exist_ok=True)
+
 GEMINI_API_KEY = os.getenv('GEMINI_API_KEY')
 OPENWEATHER_API_KEY = os.getenv('OPENWEATHER_API_KEY')
 MANDI_API_KEY = os.getenv('MANDI_API_KEY')
@@ -140,19 +143,26 @@ MANDI_API_KEY = os.getenv('MANDI_API_KEY')
 @app.route('/')
 @app.route('/index.html')
 def serve_index():
-    return send_from_directory('.', 'index.html')
+    return send_file('index.html')
 
 # Serve static files (JS, images, etc.)
-@app.route('/images/<path:filename>')
-def serve_image(filename):
-    return send_from_directory('static/images', filename)
+@app.route('/static/<path:filename>')
+def serve_static(filename):
+    return send_from_directory('static', filename)
 
+# Serve main.js from root
+@app.route('/main.js')
+def serve_js():
+    return send_file('main.js')
+
+# Serve index.html for all other routes
 @app.route('/<path:path>')
 def serve_file(path):
+    if path.startswith('api/'):
+        return "Not found", 404
     if os.path.exists(path):
         return send_file(path)
     return send_file('index.html')
-    return "File not found", 404
 
 @app.route('/api/analyze', methods=['POST'])
 def analyze():
