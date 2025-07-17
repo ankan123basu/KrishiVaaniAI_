@@ -1,0 +1,40 @@
+# Python virtual environment
+venv/
+__pycache__/
+
+# PyTorch and DNNL files
+*.lib
+*.dll
+*.jar
+
+# Model weights (we'll handle this separately)
+*.pth
+
+# Other large files
+*.log
+*.zip
+*.whl
+*.egg-info
+*.db
+*.exe
+*.dll
+*.so
+
+# Build files
+build/
+dist/
+*.pyc
+*.pyo
+*.pyd
+*.pyc
+*.pyo
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Environment files
+.env
+config.env
