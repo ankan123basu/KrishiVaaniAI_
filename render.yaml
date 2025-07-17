@@ -2,7 +2,7 @@ services:
   - type: web
     name: krishivaani-backend
     env: python
-    buildCommand: "pip install -r requirements.txt"
+    buildCommand: "chmod +x build.sh && ./build.sh"
     startCommand: "gunicorn app:app --bind 0.0.0.0:$PORT --workers 1"
     envVars:
       - key: PYTHON_VERSION
