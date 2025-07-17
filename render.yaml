@@ -2,11 +2,15 @@ services:
   - type: web
     name: krishivaani-backend
     env: python
-    buildCommand: "chmod +x build.sh && ./build.sh"
+    python:
+      version: 3.10.13
+    buildCommand: |
+      chmod +x build.sh
+      ./build.sh
     startCommand: "gunicorn app:app --bind 0.0.0.0:$PORT --workers 1"
     envVars:
       - key: PYTHON_VERSION
-        value: 3.10.13  # More stable with PyTorch
+        value: 3.10.13  # Explicit Python version
       - key: PORT
         value: 10000  # This will be automatically used by your Flask app
       - key: GEMINI_API_KEY
