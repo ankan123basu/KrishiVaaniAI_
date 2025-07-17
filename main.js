@@ -1,6 +1,9 @@
 // main.js for KrishiVaani AI
 // Handles UI interactions, voice/text input, and API calls
 
+// API Endpoints - Will be proxied through Vercel
+const API_URL = ''; // Empty string because we're using relative paths with Vercel proxy
+
 // Elements
 const imageInput = document.getElementById('imageInput');
 const analyzeBtn = document.getElementById('analyzeBtn');
@@ -28,7 +31,7 @@ let recognitionGlobal = null; // for voice stop control
 // --- Simple i18n translations (extend as needed) ---
 const translations = {
   as: {uploadLabel:'পাত বিলাক আপল’ড কৰক', analyzeBtn:'বিশ্লেষণ', askSpeak:'আপোনাৰ প্ৰশ্ন সোধক বা কোৱা', queryPlaceholder:'আপোনাৰ প্ৰশ্ন টাইপ কৰক...', sendBtn:'পঠিয়াওক', speakBtn:'কোৱা', stopBtn:'বন্ধ', listenBtn:'শুনক', weatherHeading:'বতাহ', useLocationBtn:'📍 মোৰ অৱস্থান', mandiHeading:'বাজাৰৰ দাম'},
-  gu: {uploadLabel:'પાંદાની ફોટો અપલોડ કરો', analyzeBtn:'વિશ્લેષણ', askSpeak:'તમારો પ્રશ્ન લખો કે બોલો', queryPlaceholder:'તમારો પ્રશ્ન લખો...', sendBtn:'મોકલવું', speakBtn:'બધારવું', stopBtn:'થંભાવો', listenBtn:'સાંભળો', weatherHeading:'હવામાન', useLocationBtn:'📍 મારી જગ્યા', mandiHeading:'મंडी ભાવ'},
+  gu: {uploadLabel:'પાંદાની ફોટો અપલોડ કરો', analyzeBtn:'વિશ્લેષણ', askSpeak:'તમારો પ્રશ્ન લખો કે બોલો', queryPlaceholder:'તમારો પ્રશ્ન લખો...', sendBtn:'મોકલવું', speakBtn:'બધારવું', stopBtn:'થંભાવો', listenBtn:'સાંભળો', weatherHeading:'હવામાન', useLocationBtn:'📍 મારી જગ્યા', mandiHeading:'મણ્ડી ભાવ'},
   kn: {uploadLabel:'ಎಲೆ ಚಿತ್ರ ಅಪ್‌ಲೋಡ್ ಮಾಡಿ', analyzeBtn:'ವಿಶ್ಲೇಷಿಸು', askSpeak:'ನಿಮ್ಮ ಪ್ರಶ್ನೆಯನ್ನು ಟೈಪ್ ಮಾಡಿ ಅಥವಾ ಮಾತನಾಡಿ', queryPlaceholder:'ನಿಮ್ಮ ಪ್ರಶ್ನೆಯನ್ನು ಟೈಪ್ ಮಾಡಿ...', sendBtn:'ಕಳುಹಿಸಿ', speakBtn:'ಮಾತನಾಡಿ', stopBtn:'ನಿಲ್ಲಿಸಿ', listenBtn:'ಕೆಳಿ', weatherHeading:'ಹವಾಮಾನ', useLocationBtn:'📍 ನನ್ನ ಸ್ಥಾನ', mandiHeading:'ಮಂಡಿ ಬೆಲೆ'},
   ml: {uploadLabel:'ഇല ഫോട്ടോ അപ്‌ലോഡ് ചെയ്യുക', analyzeBtn:'വിശകലനം', askSpeak:'ചോദ്യമൈ പൊലി അഡോ', queryPlaceholder:'ചോദ്യം ടൈപ്പ് ചെയ്യുക...', sendBtn:'യയക്കുക', speakBtn:'പറയുക', stopBtn:'നിര്‍ത്തുക', listenBtn:'കേള്‍ക്കുക', weatherHeading:'വാതാവസം', useLocationBtn:'📍 എന്റെ സ്ഥലം', mandiHeading:'മണ്ടി വില'},
   mr: {uploadLabel:'पानाचा फोटो अपलोड करा', analyzeBtn:'विश्लेषण', askSpeak:'तुमचा प्रश्न टाइप करा किंवा बोला', queryPlaceholder:'तुमचा प्रश्न टाइप करा...', sendBtn:'पाठवा', speakBtn:'बोला', stopBtn:'थांबा', listenBtn:'ऐका', weatherHeading:'हवामान', useLocationBtn:'📍 माझे स्थान', mandiHeading:'मंडी दर'},
@@ -350,8 +353,6 @@ async function fetchWeather(lat=null, lon=null) {
   } catch (e) {
     weatherDiv.textContent = 'Error fetching weather.';
   }
-
-
 }
 
 // Fetch mandi prices

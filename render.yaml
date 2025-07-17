@@ -1,0 +1,26 @@
+services:
+  - type: web
+    name: krishivaani-backend
+    env: python
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "gunicorn app:app"
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.9.16
+      - key: PORT
+        value: 10000
+      - key: GEMINI_API_KEY
+        fromService:
+          name: krishivaani-secrets
+          property: gemini_api_key
+      - key: OPENWEATHER_API_KEY
+        fromService:
+          name: krishivaani-secrets
+          property: openweather_api_key
+      - key: MANDI_API_KEY
+        fromService:
+          name: krishivaani-secrets
+          property: mandi_api_key
+    plan: free
+    numInstances: 1
+    healthCheckPath: /
