@@ -1,8 +1,8 @@
 Flask==3.0.0
 flask-cors==4.0.0
-# Updated to newer torch versions compatible with Python 3.13
-torch==2.3.1
-torchvision==0.18.1
+# Using latest stable PyTorch for Python 3.10
+torch==2.2.1
+torchvision==0.17.1
 pillow==10.2.0
 python-dotenv==1.0.0
 requests==2.31.0
