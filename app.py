@@ -6,7 +6,9 @@ from torchvision import models
 from PIL import Image
 import io
 import json
-from flask import Flask, request, jsonify, send_from_directory, render_template_string
+from flask import Flask, request, jsonify, send_file, send_from_directory, url_for
+import os
+from werkzeug.utils import secure_filename
 from flask_cors import CORS
 import requests
 from gtts import gTTS
@@ -125,8 +127,10 @@ def generate_remedy_gemini(disease_name, lang='en'):
     except Exception:
         return "Consult a local agricultural expert for specific treatment options."
 
-app = Flask(__name__, static_folder='.', static_url_path='')
+app = Flask(__name__, static_folder='static', static_url_path='')
 CORS(app)
+app.config['UPLOAD_FOLDER'] = 'uploads'
+app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16MB max file size
 
 GEMINI_API_KEY = os.getenv('GEMINI_API_KEY')
 OPENWEATHER_API_KEY = os.getenv('OPENWEATHER_API_KEY')
@@ -139,10 +143,15 @@ def serve_index():
     return send_from_directory('.', 'index.html')
 
 # Serve static files (JS, images, etc.)
-@app.route('/<path:filename>')
-def serve_static(filename):
-    if os.path.exists(filename):
-        return send_from_directory('.', filename)
+@app.route('/images/<path:filename>')
+def serve_image(filename):
+    return send_from_directory('static/images', filename)
+
+@app.route('/<path:path>')
+def serve_file(path):
+    if os.path.exists(path):
+        return send_file(path)
+    return send_file('index.html')
     return "File not found", 404
 
 @app.route('/api/analyze', methods=['POST'])

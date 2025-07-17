@@ -1,29 +1,26 @@
 services:
   - type: web
-    name: krishivaani-backend
-    env: python
-    python:
-      version: 3.10.13
+    name: krishivaani
+    env: python@3.11
+    region: ap-south-1
     buildCommand: |
-      chmod +x build.sh
-      ./build.sh
-    startCommand: "gunicorn app:app --bind 0.0.0.0:$PORT --workers 1"
+      pip install --upgrade pip
+      pip install torch==2.0.1 torchvision==0.15.2 --index-url https://download.pytorch.org/whl/cpu
+      pip install -r requirements.txt
+    startCommand: gunicorn app:app --bind 0.0.0.0:$PORT --workers 1 --timeout 120
     envVars:
-      - key: PYTHON_VERSION
-        value: 3.10.13  # Explicit Python version
-      - key: PORT
-        value: 10000  # This will be automatically used by your Flask app
       - key: GEMINI_API_KEY
-        fromService:
-          name: krishivaani-secrets
-          property: gemini_api_key
+        from:
+          type: secret
+          name: gemini_api_key
       - key: OPENWEATHER_API_KEY
-        fromService:
-          name: krishivaani-secrets
-          property: openweather_api_key
+        from:
+          type: secret
+          name: openweather_api_key
       - key: MANDI_API_KEY
-        fromService:
-          name: krishivaani-secrets
+        from:
+          type: secret
+          name: mandi_api_key
           property: mandi_api_key
     plan: free
     numInstances: 1
